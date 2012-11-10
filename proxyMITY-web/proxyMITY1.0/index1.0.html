@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+		<title>proxyMITY - Web Publish</title>
+
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/autoSuggest.css" type="text/css" media="screen" charset="utf-8" />
+		
+		<style type="text/css">
+			.keywords {box-shadow:none;margin-bottom:0;}
+			.keywords:focus {box-shadow:none;}
+			.vid_info{
+				float:left;
+				width:222px;
+				margin: 3px;
+				height:108px;
+				padding: 15px;
+				background: white;
+				border: 1px solid #ddd;
+				border-radius:5px;
+				cursor: pointer;
+			}
+
+			.vid_info:hover{
+				box-shadow: 0px 0px 10px 7px rgba(0, 0, 0, 0.05) inset;
+			}
+
+			.vid_info span{
+				color: SteelBlue;
+				font-weight: bold;
+			}
+
+			.presentationName{
+				font-size: 18px;
+				color: CadetBlue;
+			}
+								
+								
+			#result_container{
+				background-color: rgba(245, 245, 245, 0.8);
+				border: 1px solid rgba(0, 0, 0, 0.05);
+				border-radius: 4px 4px 4px 4px;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+				padding:3px;
+				width:770px;
+			}
+
+			div.clearer {clear: left; line-height: 0; height: 0;}
+		</style>
+
+
+	</head>
+	<body>
+	<a href="../index.html">Home</a>
+		<div class="container">
+			<div class="row" style="margin: 0;">
+				<div class="" style="margin: 0 auto; width:788px;">
+					<br><h1 style="text-align:center;">proxyMITY</h1><hr>
+					<div class="well" id="searchInput" style="visibility: hidden; display: none;">
+						<input type="text" id="" class="keywords" style="" placeholder="Enter Keywords" >
+					</div>
+				</div>
+			</div>
+			
+			<div id="searchDiv" class="row" style="margin: 0;">
+				<h2 id="searchInfo" style="text-align: center; height:50px; display:none;">Enter keywords to search for lectures.</h2>
+
+				<!--<img src="loading.gif" alt="loading..." id="loading" style="display:block;  margin: 5px auto 21px;">-->
+
+				<div class=""  id="result_container" style="display:none; margin: 0 auto; width:780px;">
+					<!--
+						<div class="vid_info">
+							<p class="presentationName">Introduction to SQL</p>
+							<p><span>Course :</span> DBMS</p>
+							<p><span>Speaker :</span> Prof. Sudarshan</p>							
+						</div>
+						<div class="vid_info"></div>
+						<div class="vid_info"></div>
+						<div class="vid_info"></div>-->
+				</div>
+			</div>
+		</div>
+		
+		
+		<script src="js/jquery-1.7.2.min.js"></script>
+		<script src="js/jquery.autoSuggest.js"></script>
+		<script type="text/javascript">
+						
+				var tagsJSON
+				var prevSearchResults = new Array()
+				var videoListxml
+				var prevNumOfTags = 0
+				var lastAdded
+				var currentRemoved
+				
+				$(document).ready(function(){
+					console.log("dom ready")
+
+					//$('#searchInput').fadeOut('fast')
+					//$('#loading').fadeIn('fast')
+					
+					$.getJSON('tags.json', function(data) {
+						console.log("getjson")
+						//store the json object into a var for searching later
+						tagsJSON = data
+						
+						//initialize autosuggest with tags json
+						$(".keywords").autoSuggest(data, {
+							selectedItemProp: "name",
+							selectedValuesProp: "name",
+							searchObjProps: "name",
+							startText: "Enter Keywords",
+							selectionLimit: 4,
+							retrieveLimit: 5,
+							minChars: 2,
+							//resultClick: searchVideo,
+							selectionAdded: function(elem){ 
+												elem.fadeTo("slow", 0.7)
+												lastAdded = elem.text()
+												console.log("lastAdded = "+lastAdded)
+												searchVideo()
+											},
+							selectionRemoved: function(elem){ 
+												elem.fadeTo("fast", 0, function(){		
+													currentRemoved = elem.text()
+													elem.remove()
+													searchVideo()
+												})
+											}
+						})
+
+						//$('#loading').fadeOut('fast')
+						$('#searchInput').css('visibility', 'visible').fadeIn()
+						$('#searchInfo').fadeIn()
+					})
+
+
+
+
+				})
+				
+				/* this function is only limited to sequential addition/removal of tags, see the generalised function below
+				//function to search for videos, whenever a tag is added/removed
+				function searchVideo1(){
+					console.log("search video")
+					var searchResults = new Array()
+					var i, j, numOfTags
+					var x = 0
+					
+					//go ahead only if there is atleast 1 tag
+					if($('.as-selection-item').size() > 0){
+						var tags = ($('.as-values').val()).split(',')
+						numOfTags = tags.length-1 // -1 becoz last element is actually empty string (autosuggest plugin bug)
+						
+						for(i=0; i<tags.length; i++)
+							console.log("tags["+i+"] = "+tags[i])
+						
+						if(numOfTags > prevNumOfTags){ //ie if a tag has been added
+							//check if only 1 tag, then just add to list all vids associated with it
+							if(numOfTags == 1){
+								console.log("only 1 tag")
+								for(i=0; i<tagsJSON.length; i++){
+									if(tagsJSON[i].name == tags[0]){
+										console.log("tag ("+tagsJSON[i].name+") matched = "+tagsJSON[i].value)
+										searchResults[x++] = tagsJSON[i].value
+									}
+								}
+								
+								//store the search results at proper pos in prevSearchResults
+								//make a copy (not reference) of current results array using slice
+								prevSearchResults[0] = searchResults.slice() 
+								
+							} else{ //more than 1 tags to search for
+								console.log("more than 1 tag")
+								var prevSResult
+								
+								//prevSresults would be results from prev num of tags, if current numoftags=2, then we take results for numoftags=1, ie prevSearchResults[0]
+								if(numOfTags == 2)
+									prevSResult = prevSearchResults[0]
+								else if(numOfTags == 3)
+									prevSResult = prevSearchResults[1]
+								else if(numOfTags == 4) //max 4 tags allowed (configured when initializing autosuggest plugin)
+									prevSResult = prevSearchResults[2]
+								
+								for(j=0; j<prevSResult.length; j++){
+									console.log("prevSResult["+j+"] = "+prevSResult[j])
+									for(k=0; k<tagsJSON.length; k++){
+										if(tagsJSON[k].value == prevSResult[j] && tagsJSON[k].name == tags[numOfTags-1]){
+											console.log("tag ("+tagsJSON[k].name+") matched = "+tagsJSON[k].value)
+											searchResults[x++] = prevSResult[j]
+										}
+									}
+								}
+								
+								//store the search results at proper pos in prevSearchResults
+								//make a copy (not reference) of current results array using slice
+								if(numOfTags == 2)
+									prevSearchResults[1] = searchResults.slice()
+								else if(numOfTags == 3)
+									prevSearchResults[2] = searchResults.slice()
+								else if(numOfTags == 4)
+									prevSearchResults[3] = searchResults.slice()
+							}
+						} else{ //ie if a tag has been removed
+							if(numOfTags == 1)
+								searchResults = prevSearchResults[0]
+							else if(numOfTags == 2)
+								searchResults = prevSearchResults[1]
+							else if(numOfTags == 3)
+								searchResults = prevSearchResults[2]					
+						}
+						
+						//if we have any result show it
+						if(searchResults.length > 0){
+							$.ajax({
+								type: "GET",
+								url: "videoList.xml",
+								dataType: "xml",
+								cache: true,
+								success: function(xml){
+														console.log("videolist.xml loaded")
+														videoListxml = xml
+														var i, xmlName
+														$('#searchInfo').text("Search Results")
+														$('#result_container').empty()
+														
+														for(i = 0; i < searchResults.length; i++){
+															xmlName = $(xml).find('xmlName:eq('+parseInt(searchResults[i])+')').text()
+															xmlName = xmlName.substring(6, xmlName.length-4)
+															console.log("searchResults["+i+"] = "+searchResults[i])
+															console.log("xmlName = "+xmlName)
+															
+															$('#result_container').append('<div class="vid_info"><a target="_blank" href="video.html?xml='+xmlName+'">'+
+															$(xml).find('VideoName:eq('+parseInt(searchResults[i])+')').text()
+															+'</a></div>')
+														}
+												 }
+							})
+						} else
+							$('#searchInfo').text("No Matching Results")
+							
+						prevNumOfTags = numOfTags
+					} else{
+						$('#result_container').empty()
+						$('.as-values').val("")
+						$('#searchInfo').text("No Matching Results")
+						prevNumOfTags = 0
+					}
+					
+					
+				} */
+				
+				//function to search for videos, whenever a tag is added/removed
+				function searchVideo(){
+					console.log("search video")
+					var searchResults = new Array()
+					var i, j, numOfTags
+					var x = 0
+					var prevSResult
+
+					//$('#searchInfo').hide()
+					
+					//go ahead only if there is atleast 1 tag
+					if($('.as-selection-item').size() > 0){
+						var tags = ($('.as-values').val()).split(',')
+						numOfTags = tags.length-1 // -1 becoz last element is actually empty string (autosuggest plugin bug)
+
+						////////////////////////////////////////////////////////////////////////////////////////////////////
+						////////////////////////////////////////////////////////////////////////////////////////////////////
+						/*var searchquery = "?numOfTags="+numOfTags
+						for(var f=0; f<numOfTags; f++){
+							searchquery += "&tag"+(f+1)+"="+tags[f]
+						}
+						console.log(searchquery)
+						
+						//AJAX request to server with tags for searching
+						
+						
+						$('#loading').fadeIn('fast')
+
+						$.ajax({
+							type: "GET",
+							url: "search-lectures"+searchquery,
+							success: function(responseJSON){
+										//console.log("reponse = "+response)
+										
+										$('#result_container').empty()
+										
+										//populate the search result details
+										for(i=0; i<responseJSON.length; i++){
+											console.log("responseJSON id = "+responseJSON[i].id)
+											var resultDetails = responseJSON[i].resultDetails
+											console.log("      { "+resultDetails.key1+", "+resultDetails.key2+", "+resultDetails.key3+" }")
+											
+											$('#result_container').append('<div class="vid_info" data-id="'+responseJSON[i].id+'">'+
+																'<p class="presentationName">'+resultDetails.key1+'</p>'+
+																'<p><span>Course :</span> '+resultDetails.key2+'</p>'+
+																'<p><span>Speaker :</span> '+resultDetails.key3+'</p>'+				
+																	'</div>')
+																	
+										}
+
+										$('#result_container').append('<div class="clearer">&nbsp;</div>')
+
+										$('#searchInfo').text(responseJSON.length+" lecture(s) found.")
+										$('#loading').fadeOut('fast', function(){
+											$('#searchInfo').fadeIn('fast')
+											$('#result_container').fadeIn('fast')
+										})
+
+										
+										//add the click listener to search results
+										$('.vid_info').click(function(){
+											console.log("vid click")
+											//var windowURL = window.location.href
+											//windowURL = windowURL.substring(0, windowURL.lastIndexOf('/'))
+											//console.log(windowURL+'/'+$(this).data('url'))
+											//window.open(windowURL+'/'+$(this).data('url'),'_blank')
+											 
+											
+											//send the id of the clicked result, get its video XML and redirect to video.html with the XML got as 
+											$('#searchInfo').hide()
+											$('#loading').fadeIn('fast')
+											$.ajax({
+												type: "GET",
+												url: "get-videoXML?id="+$(this).data('id'),
+												success: function(XMLPath){
+													$('#loading').hide()
+													$('#searchInfo').fadeIn(10, function(){
+														var windowURL = window.location.href
+														windowURL = windowURL.substring(0, windowURL.lastIndexOf('/'))
+														console.log(windowURL+'/video.html?xml='+XMLPath)
+														window.open(windowURL+'/video.html?xml='+XMLPath, 'Lecture Video')
+													})
+													//console.log("video.html?xml="+XMLPath)
+													//window.location = "video.html?xml="+XMLPath
+													
+
+													
+													
+												}
+											})
+											
+										})
+										
+									}
+						})*/
+						////////////////////////////////////////////////////////////////////////////////////////////////////////
+						////////////////////////////////////////////////////////////////////////////////////////////////////////
+						
+						for(i=0; i<tags.length; i++)
+							console.log("tags["+i+"] = "+tags[i])
+						
+						if(numOfTags > prevNumOfTags){ //ie if a tag has been added
+							//check if only 1 tag, then just add to list all vids associated with it
+							if(numOfTags == 1){
+								console.log("only 1 tag")
+								console.log('tagsJSON.length = '+tagsJSON.length)
+								for(i=0; i<tagsJSON.length; i++){
+									if(tagsJSON[i].name == tags[0]){
+										console.log("tag ("+tagsJSON[i].name+") matched = "+tagsJSON[i].value)
+										searchResults[x++] = tagsJSON[i].value
+									}
+								}
+								
+								//store the search results at proper pos in prevSearchResults
+								//make a copy (not reference) of current results array using slice
+								prevSearchResults[0] = searchResults.slice() 
+								
+							} else{ //more than 1 tags to search for
+								console.log("more than 1 tag")
+								
+								
+								//prevSresults would be results from prev num of tags, if current numoftags=2, then we take results for numoftags=1, ie prevSearchResults[0]
+								if(numOfTags == 2)
+									prevSResult = prevSearchResults[0]
+								else if(numOfTags == 3)
+									prevSResult = prevSearchResults[1]
+								else if(numOfTags == 4) //max 4 tags allowed (configured when initializing autosuggest plugin)
+									prevSResult = prevSearchResults[2]
+								
+								for(j=0; j<prevSResult.length; j++){
+									console.log("prevSResult["+j+"] = "+prevSResult[j])
+									for(k=0; k<tagsJSON.length; k++){
+										if(tagsJSON[k].value == prevSResult[j] && tagsJSON[k].name == tags[numOfTags-1]){
+											console.log("tag ("+tagsJSON[k].name+") matched = "+tagsJSON[k].value)
+											searchResults[x++] = prevSResult[j]
+										}
+									}
+								}
+								
+								//store the search results at proper pos in prevSearchResults
+								//make a copy (not reference) of current results array using slice
+								if(numOfTags == 2)
+									prevSearchResults[1] = searchResults.slice()
+								else if(numOfTags == 3)
+									prevSearchResults[2] = searchResults.slice()
+								else if(numOfTags == 4)
+									prevSearchResults[3] = searchResults.slice()
+							}
+
+						} else{ //ie if a tag has been removed
+							if(currentRemoved == lastAdded){ //ie the last tag has been removed
+								if(numOfTags == 1)
+									searchResults = prevSearchResults[0]
+								else if(numOfTags == 2)
+									searchResults = prevSearchResults[1]
+								else if(numOfTags == 3)
+									searchResults = prevSearchResults[2]	
+							} else{ //if the removed tag is not the last one, do a full search
+								//search for the 1st tag
+								console.log("searching 1st tag")
+								for(i=0; i<tagsJSON.length; i++){
+									if(tagsJSON[i].name == tags[0]){
+										console.log("tag ("+tagsJSON[i].name+") matched = "+tagsJSON[i].value)
+										searchResults[x++] = tagsJSON[i].value
+									}
+								}
+								//store the search results at proper pos in prevSearchResults
+								//make a copy (not reference) of current results array using slice
+								prevSearchResults[0] = searchResults.slice()
+								
+								if(numOfTags > 1){
+										prevSResult = prevSearchResults[0]
+										
+										//empty the array
+										searchResults.splice(0, searchResults.length)
+										x = 0
+										
+										for(j=0; j<prevSResult.length; j++){
+											console.log("prevSResult["+j+"] = "+prevSResult[j])
+											for(k=0; k<tagsJSON.length; k++){
+												if(tagsJSON[k].value == prevSResult[j] && tagsJSON[k].name == tags[numOfTags-1]){
+													console.log("tag ("+tagsJSON[k].name+") matched = "+tagsJSON[k].value)
+													searchResults[x++] = prevSResult[j]
+												}
+											}
+										}										
+								
+										prevSearchResults[1] = searchResults.slice()
+								}
+								
+								if(numOfTags > 2){
+										prevSResult = prevSearchResults[1]
+										
+										//empty the array
+										searchResults.splice(0, searchResults.length)
+										x = 0
+										
+										for(j=0; j<prevSResult.length; j++){
+											console.log("prevSResult["+j+"] = "+prevSResult[j])
+											for(k=0; k<tagsJSON.length; k++){
+												if(tagsJSON[k].value == prevSResult[j] && tagsJSON[k].name == tags[numOfTags-1]){
+													console.log("tag ("+tagsJSON[k].name+") matched = "+tagsJSON[k].value)
+													searchResults[x++] = prevSResult[j]
+												}
+											}
+										}
+																		
+										prevSearchResults[2] = searchResults.slice()
+								}
+							}
+						}
+						
+						//if we have any result show it
+						if(searchResults.length > 0){
+							$.ajax({
+								type: "GET",
+								url: "videoList.xml",
+								dataType: "xml",
+								cache: true,
+								success: function(xml){
+														console.log("videolist.xml loaded")
+														videoListxml = xml
+														var i, xmlName, videoName
+														//$('#searchDiv').show()
+														$('#result_container').show()
+														$('#searchInfo').text(searchResults.length+" lecture(s) found.")
+														$('#result_container').empty()
+														
+														////
+														
+														
+														///
+														
+														for(i = 0; i < searchResults.length; i++){
+															xmlName = $(xml).find('xmlName:eq('+parseInt(searchResults[i])+')').text()
+															xmlName = xmlName.substring(6, xmlName.length-4)
+															
+															var xmlsplit = xmlName.split("\\"); // updated by Ajay
+															xmlName = xmlsplit[2]; // updated by Ajay
+															videoName = $(xml).find('VideoName:eq('+parseInt(searchResults[i])+')').text()
+															
+															videoName = videoName.substring(0, videoName.length-4)
+
+															console.log("searchResults["+i+"] = "+searchResults[i])
+															console.log("xmlName = "+xmlName)
+															
+															$('#result_container').append('<div class="vid_info" data-url="video.html?xml='+xmlName+'">'+
+																'<p><span>Lecture : </span> '+$(xml).find('LectureName:eq('+parseInt(searchResults[i])+')').text()+'</p>'+
+																'<p><span>Course : </span>'+$(xml).find('CourseName:eq('+parseInt(searchResults[i])+')').text()+'</p>'+
+																'<p><span>Speaker : </span>  '+$(xml).find('Speaker:eq('+parseInt(searchResults[i])+')').text()+'</p>'+				
+																	'</div>')
+														}
+														
+														$('#result_container').append('<div class="clearer">&nbsp;</div>')
+
+														$('.vid_info').click(function(){
+															console.log("vid click")
+															var windowURL = window.location.href
+															windowURL = windowURL.substring(0, windowURL.lastIndexOf('/'))
+															console.log(windowURL+'/'+$(this).data('url'))
+															window.open(windowURL+'/'+$(this).data('url'),
+															  '_blank' // <- This is what makes it open in a new window.
+															)
+															
+															
+														})
+												 }
+							})
+						} else{
+							$('#searchInfo').text("No Matching Lecture!")
+							$('#result_container').hide().empty()
+						}
+						prevNumOfTags = numOfTags//comment out till here for EMMO integration
+					} else{ //no tags in the box
+						$('#result_container').fadeOut('fast').empty()
+						$('.as-values').val("")
+						$('#searchInfo').text("Enter keywords to search for lectures.").fadeIn()
+						prevNumOfTags = 0 //comment out this too
+					} 
+					
+					
+				} 
+				
+				
+				
+				
+		</script>
+	</body>
+</html>

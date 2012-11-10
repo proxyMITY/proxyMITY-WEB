@@ -1,0 +1,138 @@
+﻿html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a.mm {
+	position:fixed;
+	bottom:10px;
+	right:10px;
+	width:30px;
+	height:30px;
+	display:block;
+}
+
+.backTutorial a {
+	width: 300px;
+	float: right;
+	color: #FF7300;
+	display: block;
+}
+
+
+/* ---- END CSS RESET --- */
+
+body 
+{
+	font-family:Arial;
+	font-size:16px;
+	line-height: 23px;
+}
+
+.page-container
+{
+	width: 960px;
+	overflow:hidden;
+	margin:0 auto; 
+	padding:20px;
+	position:relative;
+}
+
+img.bg {
+        /* Set rules to fill background */
+        min-height: 100%;
+        min-width: 1024px;
+
+        /* Set up proportionate scaling */
+        width: 100%;
+        height: auto;
+
+        /* Set up positioning */
+        position: fixed;
+        top: 0;
+        left: 0;
+		z-index:-1;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+        img.bg {
+                left: 50%;
+                margin-left: -512px;   /* 50% */
+        }
+}
+
+.ie-six {
+	display:none;
+}
+
+/* START TREE MENU */
+#treeMenu li {
+	border-left: 1px solid #FF7300;
+	padding:0 0 10px 10px;
+	color:green;
+}
+
+#treeMenu li.contentContainer  {
+	background:url('../img/right.png ') no-repeat -3px 6px;
+	color: red;
+	font-weight:bold;
+	cursor: pointer;
+}
+
+#treeMenu li.contentViewing {
+        background:url('../img/down.png ') no-repeat -4px 6px;
+		color: black;
+		font-weight:bold;
+}
+
+.contentContainer ul, .contentViewing ul {
+    color:#FFFC00;
+	margin:15px 0 0 10px;
+}
+/* END TREE MENU */

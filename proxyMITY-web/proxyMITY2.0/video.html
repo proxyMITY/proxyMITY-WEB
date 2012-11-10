@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>proxyMITY - Web Publish</title>
+  <meta name="description" content="">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/video-js.css" rel="stylesheet" type="text/css">
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build.
+       Modernizr enables HTML5 elements & feature detects for optimal performance.
+       Create your own custom Modernizr build: www.modernizr.com/download/ 
+  <script src="js/libs/modernizr-2.5.3.min.js"></script>-->
+	
+	<!-- video.js must be in the <head> for older IEs to work. -->
+	<script src="js/video.js"></script>
+
+	<!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
+	<script>
+		_V_.options.flash.swf = "misc/video-js.swf";
+	</script>
+	  <script src="jquery-1.5.2.min.js" type="text/javascript"></script>
+  <script src="swfobject.js" type="text/javascript"></script>
+  <script src="jquery.captionbox.js" type="text/javascript"></script>
+  <link href="captionbox.css" media="screen" rel="stylesheet" type="text/css" />
+  
+  <script>
+  //<![CDATA[
+    var STglobalSettings = {initialState: "open"};
+  //]]>
+
+  </script>
+	<style>
+	
+		.item img{}
+		
+		/* START TREE MENU */
+		.tree_container{ overflow:hidden;}
+		.tree_container:hover{ overflow-y:scroll;} 
+		
+		#treeMenu li ul li{
+			border-left: 1px solid #333;
+		}
+		
+		
+		
+		
+		
+		#treeMenu li {
+			padding:5px 0 5px 25px;
+			color:  #FFF;
+			cursor:pointer;
+			border-bottom:1px solid #333;
+		}
+		
+		#treeMenu li:hover{background-color:	#989898 ;}
+		#treeMenu li.selected{background-color:#0099CC ;}
+
+		#treeMenu li.contentContainer{
+			background:url('img/p++.jpg ') no-repeat -1px 3px;
+			color: #0CC;
+			font-weight:bold;
+			cursor: pointer;
+			border-bottom:1px solid #333;
+		}
+
+		#treeMenu li.contentViewing
+		{
+			background:url('img/p--.jpg ') no-repeat -1px 4px;
+			color:  #0CC;
+			font-weight:bold;
+			border-bottom:0px solid #333;
+		}
+
+		.contentContainer ul, .contentViewing ul {
+			color: #0CC;
+			margin:15px 0 0 10px;
+			border-bottom:1px solid #333;
+			
+		}
+		ol, ul {
+			list-style: none;
+		}
+		/* END TREE MENU */
+		
+		#slide_links li{float:left; margin-right:10px;}
+		
+		header span{margin-right:150px; width: 200px; display:inline-block;}
+	
+</style>
+
+<style>
+body{ border-left-color:#333333;
+		border-right-color:#333333;
+		border-left-style:solid;
+		border-right-style:solid;
+		margin-left:10%;
+		border-left-width:1px;
+		margin-right:90px;
+		border-right-width:1px;
+		background:#000000;
+
+}
+</style>
+	<style type="text/css">
+a:link {
+COLOR: #FFFFFF;
+}
+a:visited {
+COLOR: #0CC;
+}
+a:hover {
+COLOR:  #FC9;
+}
+a:active {
+COLOR: #ffffff;
+}
+</style>
+</head>
+<body>
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <header style="width:90%;height:5%; margin:0 auto;">
+  <tt>
+  <font  size="+1" face="Algerian">
+		<br> <h1 style="text-align:center;"></h1> </font>
+       
+	<font color="#00CC99" ><b><p> <span class="course_name" style: margin-right="" style="margin-right:40%;"> <font color="#FFFFFF" size="+0">Course:</font>  </span><span class="LectureName"><font  color="#FFFFFF" size="+0">Lecture On: </font>  </span></p>
+		<p><span class="speaker" style="margin-right:40%;"><font  color="#FFFFFF" size="+0">Speaker: </font>  </span><span class="sp_Institute"><font  color="#FFFFFF" size="+0" >Institute: </font>  </span></p>
+</b>  </font></tt></header></font>
+  
+  <!--new one -->
+  
+	<hr>
+	<a href="#" id="full_slide"><b><font color="FF0000" size="+1"> <img src="img/button.jpg" height="32" width="32"  align="right"> </font></b></a> 
+  <div role="main" class="main" style="width:95%; height:90%; margin: 0 auto; border:2px #333 ;" >
+		<div class="left_container" style="width:30%; height:55%;float:left; margin-right:5px;border:2px  #333 ;">
+<!--			<div class="video_container" style=" height:30%; margin-right:1px; margin-bottom:01px;border:1px #000000 ;"> -->
+           
+<!--			<div class="tree_container" style="height:300px;border:1px #000000;margin-right:-18px; margin-bottomt:10px margin-left:-18px;"> -->
+            <div class="tree_container" style="width:100%;height:550px;border:2px solid  #333; border-right:1px solid #333; margin-right:-7%; margin-bottomt:10%;overflow:scroll;overflow-y:scroll;overflow-x:hidden;" >
+				<ul id="treeMenu">
+					
+				</ul>
+			</div>
+		</div>
+			<!-- <li id="full_slide"><a href="#"><b><font color="FF0000" size="+1"> <img src="img/button.jpg" height="32" width="32"  align="right"> </font></b></a></li> -->
+		<div class="right_container" style="width:62.3%;height:550px; margin-left:33%;border:2px solid  #333;"  >
+
+
+
+
+		 <div class="video_container" style="Zheight:25.4%; margin-right:25%; margin-bottom:10% ; ">
+                                	<!--<video id="lect_vid" class="video-js vjs-default-skin" controls preload="none" width="318" height="254"  poster="img/poster.png"  data-setup="{}" style="display:none;">
+					<source src="data/video/DBMS_L3_Introduction to SQL(WT).mp4" type='video/mp4' />
+					<source src="data/video/oceans-clip.webm" type='video/webm' />
+					<source src="vids/oceans-clip.ogv" type='video/ogg' />
+					<track kind="captions" src="misc/captions.vtt" srclang="en" label="English" />
+				</video>-->
+			</div>
+		</div>
+
+
+	</div>
+  <!--<footer>-->
+		<br><br><p style="text-align:center; margin: -10px 0 10px;"><font color="#FFFFFF" size="-1">All contents are licensed under Creative Commons by Attribution 2.5, India.</font></p><hr>
+  <!--</footer>-->
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- scripts concatenated and minified via build script -->
+	<script src="js/jquery-1.7.2.min.js"></script>
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+  <script src="js/bootstrap-popover.js"></script>
+	
+	<script type="text/javascript">
+
+
+		var myPlayer //variable for referencing the player object
+		var curSlideIndex = 0 //index of the last slide
+		var intervalId //used for clearing out setInterval
+		var slide_vid = null 
+		var lefttime
+		var righttime
+		
+		
+		
+		
+		$(document).ready(function(){
+			//load xml and parse
+			$.ajax({
+				type: "GET",
+				url: "data/xml/"+url_query('xml')+".xml",
+				dataType: "xml",
+				async: false,
+				success: parseXml
+			});
+			
+			
+			
+			
+			//making slides bigger n smaller
+			$('#full_slide').toggle(function(){
+					$('.left_container').hide()
+					//$('.right_container').css('margin','0 auto')
+					$('.right_container').animate({ 'width':800, 'margin-left':112, })
+					$('#slider').animate({ 'height':600})
+				},
+				
+				function(){
+					$('.right_container').animate({ 'width':700, 'margin-left': 350}, 400, function(){ $('.left_container').fadeIn() })
+					$('#slider').animate({ 'height':518})
+				
+				}
+			)
+			
+			
+		}); //end document.ready
+
+		//functions for moving the links right left
+		function moveleft () {
+			console.log('moveleft')
+			var marginLeft = $('#slide_links').css('margin-left')
+			marginLeft = parseInt(marginLeft.substring(0, marginLeft.length-2))
+			if(marginLeft < 0)
+				$('#slide_links').css('margin-left', marginLeft+5)
+			else
+				clearInterval(lefttime)
+		}
+
+		function moveright () {
+			console.log('moveright')
+			var marginLeft = $('#slide_links').css('margin-left')
+			marginLeft = parseInt(marginLeft.substring(0, marginLeft.length-2))
+			if(Math.abs(marginLeft) < $('#slide_links').width()-690)
+				$('#slide_links').css('margin-left', marginLeft-5)
+			else
+				clearInterval(righttime)
+		}
+		
+		// Parse URL Queries
+		function url_query( query ) {
+			query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+			var expr = "[\\?&]"+query+"=([^&#]*)";
+			var regex = new RegExp( expr );
+			var results = regex.exec( window.location.href );
+			if( results !== null ) {
+				return results[1];
+				return decodeURIComponent(results[1].replace(/\+/g, " "));
+			} else {
+				return false;
+			}
+		}
+		
+		
+		//function for parsing data xml
+		function parseXml(xml){
+		
+			var courseFolderName = "" // by Ajay
+			var lectureFolderName = "" // by Ajay
+		
+			$(xml).find('Details').each(function(){
+			
+				var courseFolderName = $(this).find('CourseName').text()
+				var lectureFolderName =  $(this).find('Presentation').text()
+				
+				//set source of video tag
+				$('.video_container').html('<video id="lect_vid" class="video-js vjs-default-skin" controls preload="none" width="800" height="550"  data-setup="{}" ><source src="data/video/'+$(this).find('videoName').text()+'" type="video/mp4" /><source src="data/video/'+$(this).find('videoName').text()+'" type="video/webm" /><source src="data/video/'+$(this).find('videoName').text()+'" type="video/flv" /><source src="data/video/'+$(this).find('videoName').text()+'" type="video/avi" /><source src="data/video/'+$(this).find('videoName').text()+'" type="video/3gp" /><source src="data/video/'+$(this).find('videoName').text()+'" type="video/wmv" /><source src="data/video/'+$(this).find('videoName').text()+'" type="video/mkv" /></video>')
+				
+				console.log($(this).find('CourseName').text())
+				//set coursename
+				$('.course_name').append($(this).find('CourseName').text())
+				//set presentation
+				$('.LectureName').append($(this).find('LectureName').text())
+				
+				//set speaker
+				$('.speaker').append($(this).find('Speaker').text())
+				
+				//set contact
+				$('.sp_Institute').append($(this).find('Institute').text())
+			});
+			
+			//set the slide links
+			$(xml).find('Link').each(function(){
+				$('#slide_links').append('<li><a target="_blank" href="'+$(this).text()+'">'+$(this).attr('name')+'</a></li>')
+			});
+
+			////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////
+			//$('#slide_links').show()
+			//console.log('showwidth1 = '+$('#slide_links').width())
+
+			//$('#slide_links').hide()
+			console.log('hidewidth = '+$('#slide_links').width())
+			$('#slide_links').css({'width': ($('#slide_links').width()+35)+'px', 'margin-left' : '0px', 'position' : 'static'})
+			console.log('showwidth2 = '+$('#slide_links').width())
+
+			$('#slide_links').show()
+			console.log('showwidth3 = '+$('#slide_links').width())
+			
+			$('#link_left').hover(
+				function(){
+					console.log('movelefthover')
+					$('#link_left').css('opacity', 1)
+					lefttime = setInterval("moveleft()",50)
+				},
+				function(){
+					console.log('movelefthoverend')
+					$('#link_left').css('opacity', 0.5)
+					clearInterval(lefttime)
+				}
+			)
+
+			$('#link_right').hover(
+				function(){
+					console.log('moverighthover')
+					$('#link_right').css('opacity', 1)
+					righttime = setInterval("moveright()",50)
+				},
+				function(){
+					console.log('moverighthoverend')
+					$('#link_right').css('opacity', 0.5)
+					clearInterval(righttime)
+				}
+			)
+
+			/////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////
+			
+			
+			
+			//generate the tree
+			var prevTheme = ""
+			var prevSlideName = ""
+			var prevSlide = ""
+			var sameTheme = 0
+			var curTheme = ""
+			var curSlide = ""
+			var curSlideName = ""
+			var startTime
+			var startTimeS
+			var endTime
+			var endTimeS
+			var prevStartTime
+			var prevStartTimeS
+			var prevEndTime
+			var prevEndTimeS
+			var numSlides = 0
+			var temp=""
+			var format=".PNG";
+			$(xml).find('Theme').each(function(){
+				
+				curSlide = $(this).find('SlideName').text()
+				//remove .PNG from string
+				temp=curSlide.substring(curSlide.length-4,curSlide.length)
+				curSlide=curSlide.concat(format);
+				if(temp==".mp4" || temp==".flv" || temp==".MP4" || temp==".FLV" || temp==".AVI" || temp==".avi" || temp==".3gp" || temp==".3GP" || temp==".WMV" || temp==".wmv" || temp==".MKV" || temp==".mkv")
+				{
+				curSlide=curSlide.substring(0, curSlide.length-4)
+				}
+				else if(temp=="webm" || temp=="WEBM" || temp=="MPEG" || temp=="MPEG" || temp=="3GPP" || temp=="3gpp" )
+				{
+				curSlide=curSlide.substring(0, curSlide.length-5)
+				}
+				curSlideName = curSlide.substring(0, curSlide.length-4)
+				curTheme = $(this).attr('name')
+				startTime = $(this).find('StartTime').text()
+				startTimeS = parseInt(startTime.substring(0,2))*3600 + parseInt(startTime.substring(3,5))*60 + parseInt(startTime.substring(6,8))
+				endTime = $(this).find('EndTime').text()
+				endTimeS = parseInt(endTime.substring(0,2))*3600 + parseInt(endTime.substring(3,5))*60 + parseInt(endTime.substring(6,8))
+								
+
+			
+				if(curTheme == prevTheme){
+					sameTheme++
+					if(sameTheme == 2){
+						$('#treeMenu .tree_main:last').remove()
+						$('#treeMenu').append('<li class="contentContainer">'+curTheme+'<ul class="tree_child" style="display: none"><li data-starttime="'+prevStartTimeS+'" data-endtime="'+prevEndTimeS+'" class="tree_main" id="'+prevSlideName+'">'+prevSlideName+'</li><li data-startTime="'+startTimeS+'" data-endtime="'+endTimeS+'" class="tree_main" id="'+curSlideName+'">'+curSlideName+'</li>')
+					}else
+						$('#treeMenu .contentContainer:last ul').append('<li data-startTime="'+startTimeS+'" data-endtime="'+endTimeS+'" class="tree_main" id="'+curSlideName+'">'+curSlideName+'</li>')					
+				} else{
+					if(sameTheme>1)
+						$('#treeMenu').append('</ul></li>')
+					$('#treeMenu').append('<li data-startTime="'+startTimeS+'" data-endtime="'+endTimeS+'" class="tree_main" id="'+curSlideName+'">'+curTheme+'</li>')
+					sameTheme=1
+				}
+				
+				//add the slide thumbnail popovers
+				if(sameTheme == 2){
+					$('.tree_main:last').prev().popover(
+							{
+								
+								title: prevStartTime+' - '+prevEndTime,
+								content: '<img alt="" src="data/slides/'+courseFolderName+'/'+lectureFolderName+'/'+prevSlide+'">',
+								//placement: 'top'
+							}
+					);
+				}
+				
+				$('.tree_main:last').popover(
+						{
+													
+							title: startTime+' - '+endTime,
+							content: '<img alt="" src="data/slides/'+courseFolderName+'/'+lectureFolderName+'/'+curSlide+'">',
+							//placement: 'top'
+						}
+				);
+				
+				
+				//set images for slideshow
+				if($(this).attr('video')){
+					$('.carousel-inner .item:last').before('<div class="item video_sl"><video id="slide_video'+numSlides+'" class="video-js vjs-default-skin" preload="none" width="690" height="518"   data-setup="{}" ><source src="data/video/'+courseFolderName+'/'+curSlide+'" type="video/webm" /><source src="data/video/'+courseFolderName+'/'+curSlide+'" type="video/mp4" /><source src="data/video/'+courseFolderName+'/'+curSlide+'" type="video/flv" /><source src="data/video/'+courseFolderName+'/'+curSlide+'" type="video/avi" /><source src="data/video/'+courseFolderName+'/'+curSlide+'" type="video/3gp" /><source src="data/video/'+courseFolderName+'/'+curSlide+'" type="video/wmv" /><source src="data/video/'+courseFolderName+'/'+curSlide+'" type="video/mkv" /></video></div>')
+				} else				
+				$('.carousel-inner .item:last').before('<div class="item"><img alt="" src="data/slides/'+courseFolderName+'/'+lectureFolderName+'/'+curSlide+'"></div>')
+				
+				prevTheme = curTheme
+				prevSlideName = curSlideName
+				prevSlide = curSlide
+				prevStartTime = startTime
+				prevStartTimeS = startTimeS
+				prevEndTime = endTime
+				prevEndTimeS = endTimeS
+				numSlides++
+			});
+			
+			
+			
+			$('.carousel').carousel({
+				interval: false
+			})
+			
+			//Class 'contentContainer' refers to 'li' that has child with it.
+      //By default the child ul of 'contentContainer' will be set to 'display:none'
+      $("#treeMenu li").toggle(function(){ // start 1st click fn
+						console.log("clicked1");
+					  $(this).children('ul').slideDown()
+					  if($(this).hasClass('contentContainer'))  
+						  $(this).removeClass('contentContainer').addClass('contentViewing')
+				  }, 
+				  
+				  function(){ //start 2nd click fn
+						console.log("clicked2");
+					  $(this).children('ul').slideUp()
+
+					  if ($(this).hasClass('contentViewing'))
+						  $(this).removeClass('contentViewing').addClass('contentContainer')
+					} 
+			); 
+			
+			//tree click function
+			$('#treeMenu .tree_main').click(function(){
+				if(slide_vid){
+					slide_vid.currentTime(0)
+					slide_vid.pause()
+				}
+				$('#treeMenu .selected').removeClass('selected')
+				$(this).addClass('selected')
+				console.log("clicked")
+				curSlideIndex = $(this).index('.tree_main')
+				var jumpToVideo = parseInt($(this).data('starttime'))
+				
+				console.log("curSlideIndex = "+curSlideIndex);
+				console.log("jumpToVideo "+jumpToVideo);
+				
+				//jump the slideshow to that slide
+				$('.carousel').carousel(curSlideIndex)
+				if($('.carousel-inner .item:eq('+curSlideIndex+')').hasClass('video_sl')){
+					slide_vid = _V_('slide_video'+curSlideIndex)
+					slide_vid.play()
+				}				
+				myPlayer.play()
+				myPlayer.currentTime(jumpToVideo)
+				
+			});
+			
+			//in the end get reference to the video player object
+			_V_("#lect_vid").ready(function(){
+				console.log("player ready")
+				myPlayer = this
+
+				myPlayer.addEvent("play", function(){
+					intervalId = setInterval(goToSlide, 500)				
+				})
+			
+				myPlayer.addEvent("pause", function(){
+					clearInterval(intervalId)				
+				})
+				
+				//myPlayer.addEvent("timeupdate", goToSlide)
+
+			});
+			
+			//make first slide visible in starting
+			$('.carousel-inner .item:eq(0)').addClass('active')
+			$('#treeMenu .tree_main:first').addClass('selected')
+			if($('#treeMenu li:first').hasClass('contentContainer'))
+				$('#treeMenu li:first').click()
+				
+			$('#slide_links a').click(function(){ myPlayer.pause() })
+			
+			
+		}
+		
+		//binary search for next slide
+		function goToSlide(){
+			console.log("gotoslide")
+			var curTime = myPlayer.currentTime()
+			var curSlideEnd = parseInt($('.tree_main:eq('+(curSlideIndex)+')').data('endtime'))
+			var curSlideStart = parseInt($('.tree_main:eq('+(curSlideIndex)+')').data('starttime'))
+			var $nxtSlide = $('.tree_main:eq('+(curSlideIndex+1)+')')
+			var nxtSlideStart = parseInt($nxtSlide.data('starttime'))
+			var nxtSlideEnd = parseInt($nxtSlide.data('endtime'))
+			if(curTime >= curSlideEnd){ //if current video play time has inc past curr slide's endtime
+				//console.log("1")
+				if(curTime < nxtSlideStart){ //if curtime between end of cur slide n start of nxt slide, s
+					//console.log("2")
+					$('.carousel').carousel($('.item').size()-1)
+				} else if(curTime < nxtSlideEnd){
+					//console.log("3")
+					if(slide_vid){
+						slide_vid.currentTime(0)
+						slide_vid.pause()
+					}
+					
+					if($nxtSlide.parent().hasClass('tree_child')){
+						$nxtSlide.parent().slideDown()
+					  if($nxtSlide.parents('li').hasClass('contentContainer'))  
+						  $nxtSlide.parents('li').removeClass('contentContainer').addClass('contentViewing')
+					}
+					$('#treeMenu .selected').removeClass('selected')
+					$nxtSlide.addClass('selected')
+					$('.carousel').carousel(++curSlideIndex)		
+					if($('.carousel-inner .item:eq('+curSlideIndex+')').hasClass('video_sl')){
+						slide_vid = _V_('slide_video'+curSlideIndex)
+						slide_vid.play()
+					}
+				}	else{
+					//console.log("4")
+					if(slide_vid){
+						slide_vid.currentTime(0)
+						slide_vid.pause()
+					}
+					curSlideIndex = binary_search(Math.ceil(curTime)) //search the slide with current time
+					if($('#treeMenu .tree_main:eq('+curSlideIndex+')').parent().hasClass('tree_child')){
+						$('#treeMenu .tree_main:eq('+curSlideIndex+')').parent().slideDown()
+					  if($('#treeMenu .tree_main:eq('+curSlideIndex+')').parents('li').hasClass('contentContainer'))  
+						  $('#treeMenu .tree_main:eq('+curSlideIndex+')').parents('li').removeClass('contentContainer').addClass('contentViewing')
+					}
+					$('#treeMenu .selected').removeClass('selected')
+					$('#treeMenu .tree_main:eq('+curSlideIndex+')').addClass('selected')
+					$('.carousel').carousel(curSlideIndex)
+					if($('.carousel-inner .item:eq('+curSlideIndex+')').hasClass('video_sl')){
+						slide_vid = _V_('slide_video'+curSlideIndex)
+						slide_vid.play()
+					}
+				}
+			} else if(curTime < curSlideStart){
+				if(slide_vid){
+					slide_vid.currentTime(0)
+					slide_vid.pause()
+				}
+				curSlideIndex = binary_search(Math.ceil(curTime)) //search the slide with current time
+				if($('#treeMenu .tree_main:eq('+curSlideIndex+')').parent().hasClass('tree_child')){
+					$('#treeMenu .tree_main:eq('+curSlideIndex+')').parent().slideDown()
+					if($('#treeMenu .tree_main:eq('+curSlideIndex+')').parents('li').hasClass('contentContainer'))  
+						$('#treeMenu .tree_main:eq('+curSlideIndex+')').parents('li').removeClass('contentContainer').addClass('contentViewing')
+				}
+				$('#treeMenu .selected').removeClass('selected')
+				$('#treeMenu .tree_main:eq('+curSlideIndex+')').addClass('selected')
+				$('.carousel').carousel(curSlideIndex)
+				if($('.carousel-inner .item:eq('+curSlideIndex+')').hasClass('video_sl')){
+					slide_vid = _V_('slide_video'+curSlideIndex)
+					slide_vid.play()
+				}
+			}
+		}
+		
+		//search the slide with current time n return its index
+		function binary_search(seekedTime){ 
+			var imin = 0
+			var imax = $('.tree_main').size()-1
+			console.log("imax = "+imax+"   seekedtime = "+seekedTime)
+			var $linkArray = $('.tree_main')
+			var startTime
+			var endTime
+			var imid
+			
+			// continue searching while [imin,imax] is not empty
+			while(imax >= imin){
+				imid = Math.ceil((imin + imax)/2); /* calculate the midpoint for roughly equal partition */
+				//console.log("imid = "+imid)
+				// determine which subarray to search
+				startTime = $($linkArray[imid]).data('starttime')
+				endTime = $($linkArray[imid]).data('endtime')
+				//console.log("startTime = "+startTime+"   endTime = "+endTime)
+				if(startTime <= seekedTime){
+					if(endTime > seekedTime){
+						console.log("index = "+imid)
+						return imid
+					} else
+						imin = imid + 1; // change min index to search upper subarray
+				}else					
+					imax = imid - 1; // change max index to search lower subarray
+			}
+			console.log("seekedTime = "+seekedTime+" not found.")
+		}
+		
+		
+	</script>
+  <!-- end scripts -->
+
+  
+</body>
+</html>

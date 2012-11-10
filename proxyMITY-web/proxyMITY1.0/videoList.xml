@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProxyMITYVideos>
+	<Video>
+		<VideoName>Aerodynamics-L6A.webm</VideoName>
+		<CourseName>AEROSPACE ENGG</CourseName>
+		<LectureName>Aerodynamics Of Compressor and Turbines_part_1</LectureName>
+		<Speaker>Prof.Bhaskar Roy</Speaker>
+		<xmlName>.\data\xml\Aerodynamics-L6A.xml</xmlName>
+	</Video>
+</ProxyMITYVideos>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Proximity>
+    <Details>
+        <videoName>Aerodynamics-L6A.webm</videoName>
+        <CourseName>AEROSPACE ENGG</CourseName>
+        <LectureName>Aerodynamics Of Compressor and Turbines_part_1</LectureName>
+        <Speaker>Prof.Bhaskar Roy</Speaker>
+        <Institute>IIT Bombay</Institute>
+    </Details>
+    <Theme name="Aerodynamics Of Comperssors and Turbines">
+        <SlideName>Introduction</SlideName>
+        <StartTime>00:00:00</StartTime>
+        <EndTime>00:01:48</EndTime>
+    </Theme>
+    <Theme name="Aerodynamics Of Comperssors and Turbines">
+        <SlideName>Axial Compressor Losses</SlideName>
+        <StartTime>00:01:48</StartTime>
+        <EndTime>00:07:59</EndTime>
+    </Theme>
+    <Theme name="Aerodynamics Of Comperssors and Turbines">
+        <SlideName>Axial Compressor Losses(Cont)1</SlideName>
+        <StartTime>00:08:00</StartTime>
+        <EndTime>00:16:18</EndTime>
+    </Theme>
+	<Theme name="Aerodynamics Of Comperssors and Turbines">
+        <SlideName>Reynold's no.Effect</SlideName>
+        <StartTime>00:16:18</StartTime>
+        <EndTime>00:18:30</EndTime>
+    </Theme>
+	<Theme name="Aerodynamics Of Comperssors and Turbines">
+        <SlideName>Axial Compressor Losses(Cont)2</SlideName>
+        <StartTime>00:18:30</StartTime>
+        <EndTime>00:20:52</EndTime>
+    </Theme>
+	<Theme name="Aerodynamics Of Comperssors and Turbines">
+        <SlideName>Axial Compressor Losses(Contd)3</SlideName>
+        <StartTime>00:20:52</StartTime>
+        <EndTime>00:28:36</EndTime>
+    </Theme>
+	<Theme name="Aerodynamics Of Comperssors and Turbines">
+        <SlideName>Axial Compressor Losses(Contd)4</SlideName>
+        <StartTime>00:20:36</StartTime>
+        <EndTime>00:30:41</EndTime>
+    </Theme>
+</Proximity>
